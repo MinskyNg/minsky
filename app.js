@@ -40,8 +40,13 @@ if (app.get('env') === 'development') {
     app.use(errorHandler());
 }
 
-// 简历请求
+// 首页请求
 app.get('/', function(req, res) {
+    res.render(path.join(__dirname, 'views', 'home.html'));
+});
+
+// 简历请求
+app.get('/resume', function(req, res) {
     res.render(path.join(__dirname, 'views', 'resume.html'));
 });
 
