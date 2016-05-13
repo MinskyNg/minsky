@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var debug = require('debug');
+var ejs = require('ejs');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
@@ -20,7 +21,8 @@ process.env.NODE_ENV = 'development';
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine('.html', ejs.__express);
+app.set('view engine', 'html');
 
 // 使用中间件
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -40,21 +42,21 @@ if (app.get('env') === 'development') {
 
 // 简历请求
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'views', 'resume.html'));
+    res.render(path.join(__dirname, 'views', 'resume.html'));
 });
 
 // demo请求
 app.get('/demo', function(req, res) {
-    res.sendFile(path.join(__dirname, 'views', 'demo.html'));
+    res.render(path.join(__dirname, 'views', 'demo.html'));
 });
 // 详细demo请求
 app.get('/demo/:detail', function(req, res) {
-    res.sendFile(path.join(__dirname, 'views', req.params.detail + '.html'));
+    res.render(path.join(__dirname, 'views', req.params.detail + '.html'));
 });
 
 // 聊天室请求处理
 app.get('/chatroom', function(req, res) {
-    res.sendFile(path.join(__dirname, 'views', 'chatroom.html'));
+    res.render(path.join(__dirname, 'views', 'chatroom.html'));
 });
 
 // 聊天室登陆处理
@@ -78,7 +80,7 @@ app.post('/chatroom', function(req, res) {
 
 // 日记应用请求处理
 app.get('/diary', function(req, res) {
-    res.sendFile(path.join(__dirname, 'views', 'diary.html'));
+    res.render(path.join(__dirname, 'views', 'diary.html'));
 });
 
 // 捕获 404 错误并前往错误处理
