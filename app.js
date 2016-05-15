@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var debug = require('debug');
 var ejs = require('ejs');
+var xss =require('xss');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
@@ -126,6 +127,7 @@ var sockets = {};
 io.on('connection', function(socket) {
     // 监听用户上线
     socket.on('online', function(data) {
+        data.user = xss(data.user);
         // 使用用户名标记socket
         socket.name = data.user;
         // users 中不存在该用户则将其加入，并存储其socket对象引用
@@ -144,6 +146,7 @@ io.on('connection', function(socket) {
 
     // 监听用户发布聊天信息
     socket.on('send', function(data) {
+        data.msg = xss(data.msg);
         if (data.receiver == 'all') {
             // 向其他所有用户广播该用户的信息
             socket.broadcast.emit('send', data);
