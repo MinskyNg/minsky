@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var debug = require('debug');
 var ejs = require('ejs');
-var xss =require('xss');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
@@ -67,6 +66,33 @@ app.get('/chatroom', function(req, res) {
 
 // 聊天室登陆处理
 app.post('/chatroom', function(req, res) {
+    req.body.name = req.body.name.replace(/alert/g, 'alSAFEert');
+    req.body.name = req.body.name.replace(/<\/script>/g, 'scrSAFEipt');
+    req.body.name = req.body.name.replace(/<script>/g, 'scrSAFEipt');
+    req.body.name = req.body.name.replace(/<object>/g, 'objSAFEct');
+    req.body.name = req.body.name.replace(/<object>/g, 'obSAFEct');
+    req.body.name = req.body.name.replace(/javascript/g, 'javaSAFEscript');
+    req.body.name = req.body.name.replace(/onabort/g, 'onSAFEabort');
+    req.body.name = req.body.name.replace(/onblur/g, 'onSAFEblur');
+    req.body.name = req.body.name.replace(/onchange/g, 'onSAFEchange');
+    req.body.name = req.body.name.replace(/onclick/g, 'onSAFEclick');
+    req.body.name = req.body.name.replace(/ondblclick/g, 'onSAFEdblclick');
+    req.body.name = req.body.name.replace(/onerror/g, 'onSAFEerror');
+    req.body.name = req.body.name.replace(/onfocus/g, 'onSAFEfocus');
+    req.body.name = req.body.name.replace(/onkeydown/g, 'onSAFEkeydown');
+    req.body.name = req.body.name.replace(/onkeypress/g, 'onSAFEkeypress');
+    req.body.name = req.body.name.replace(/onkeyup/g, 'onSAFEkeyup');
+    req.body.name = req.body.name.replace(/onload/g, 'onSAFEload');
+    req.body.name = req.body.name.replace(/onmousedown/g, 'onSAFEmousedown');
+    req.body.name = req.body.name.replace(/onmousemove/g, 'onSAFEmousemove');
+    req.body.name = req.body.name.replace(/onmouseout/g, 'onSAFEmouseout');
+    req.body.name = req.body.name.replace(/onmouseup/g, 'onSAFEmouseup');
+    req.body.name = req.body.name.replace(/onmouseup/g, 'onSAFEmouseup');
+    req.body.name = req.body.name.replace(/onreset/g, 'onSAFEresetK');
+    req.body.name = req.body.name.replace(/onresize/g, 'onSAFEresize');
+    req.body.name = req.body.name.replace(/onselect/g, 'onSAFEselect');
+    req.body.name = req.body.name.replace(/onsubmit/g, 'onSAFEsubmit');
+    req.body.name = req.body.name.replace(/onunload/g, 'onSAFEunload');
     if (users[req.body.name]) {
         // 当前用户存在，则不允许登陆
         res.send({
@@ -127,7 +153,33 @@ var sockets = {};
 io.on('connection', function(socket) {
     // 监听用户上线
     socket.on('online', function(data) {
-        data.user = xss(data.user);
+        data.user = data.user.replace(/alert/g, 'alSAFEert');
+        data.user = data.user.replace(/<\/script>/g, 'scrSAFEipt');
+        data.user = data.user.replace(/<script>/g, 'scrSAFEipt');
+        data.user = data.user.replace(/<object>/g, 'objSAFEct');
+        data.user = data.user.replace(/<object>/g, 'obSAFEct');
+        data.user = data.user.replace(/javascript/g, 'javaSAFEscript');
+        data.user = data.user.replace(/onabort/g, 'onSAFEabort');
+        data.user = data.user.replace(/onblur/g, 'onSAFEblur');
+        data.user = data.user.replace(/onchange/g, 'onSAFEchange');
+        data.user = data.user.replace(/onclick/g, 'onSAFEclick');
+        data.user = data.user.replace(/ondblclick/g, 'onSAFEdblclick');
+        data.user = data.user.replace(/onerror/g, 'onSAFEerror');
+        data.user = data.user.replace(/onfocus/g, 'onSAFEfocus');
+        data.user = data.user.replace(/onkeydown/g, 'onSAFEkeydown');
+        data.user = data.user.replace(/onkeypress/g, 'onSAFEkeypress');
+        data.user = data.user.replace(/onkeyup/g, 'onSAFEkeyup');
+        data.user = data.user.replace(/onload/g, 'onSAFEload');
+        data.user = data.user.replace(/onmousedown/g, 'onSAFEmousedown');
+        data.user = data.user.replace(/onmousemove/g, 'onSAFEmousemove');
+        data.user = data.user.replace(/onmouseout/g, 'onSAFEmouseout');
+        data.user = data.user.replace(/onmouseup/g, 'onSAFEmouseup');
+        data.user = data.user.replace(/onmouseup/g, 'onSAFEmouseup');
+        data.user = data.user.replace(/onreset/g, 'onSAFEresetK');
+        data.user = data.user.replace(/onresize/g, 'onSAFEresize');
+        data.user = data.user.replace(/onselect/g, 'onSAFEselect');
+        data.user = data.user.replace(/onsubmit/g, 'onSAFEsubmit');
+        data.user = data.user.replace(/onunload/g, 'onSAFEunload');
         // 使用用户名标记socket
         socket.name = data.user;
         // users 中不存在该用户则将其加入，并存储其socket对象引用
@@ -146,7 +198,6 @@ io.on('connection', function(socket) {
 
     // 监听用户发布聊天信息
     socket.on('send', function(data) {
-        data.msg = xss(data.msg);
         if (data.receiver == 'all') {
             // 向其他所有用户广播该用户的信息
             socket.broadcast.emit('send', data);
