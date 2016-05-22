@@ -94,6 +94,10 @@ app.post('/chatroom', function(req, res) {
     }
 });
 
+// markdown编辑器请求处理
+app.get('/markeditor', function(req, res) {
+    res.render(path.join(__dirname, 'views', 'markeditor.html'));
+});
 
 // 日记应用请求处理
 app.get('/diary', function(req, res) {
