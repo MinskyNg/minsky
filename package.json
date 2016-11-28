@@ -1,35 +1,48 @@
 {
-  "name": "chatroom",
+  "name": "minksy",
   "version": "1.0.0",
-  "description": "A online chatroom",
+  "description": "minksy",
   "scripts": {
     "start": "node app.js",
     "deploy": "NODE_ENV=production node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MinskyNg/chatroom.git"
+    "url": "git+https://github.com/MinskyNg/minksy.git"
   },
   "author": "minskyng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MinskyNg/chatroom/issues"
+    "url": "https://github.com/MinskyNg/minksy/issues"
   },
-  "homepage": "https://github.com/MinskyNg/chatroom#readme",
+  "homepage": "https://github.com/MinskyNg/minksy#readme",
   "dependencies": {
     "babel-runtime": "6.x",
-    "body-parser": "~1.13.2",
-    "cookie-parser": "~1.3.5",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "~1.15.2",
+    "codemirror": "^5.19.0",
+    "cors": "^2.8.1",
     "debug": "^2.2.0",
-    "ejs": "~2.3.3",
+    "ejs": "~2.5.2",
     "errorhandler": "^1.4.3",
-    "express": "~4.13.1",
-    "marked": "^0.3.5",
-    "morgan": "~1.6.1",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6",
-    "serve-favicon": "~2.3.0",
-    "socket.io": "^1.4.5",
-    "xss": "^0.2.13"
+    "express": "~4.14.0",
+    "highlight.js": "^9.7.0",
+    "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
+    "marked": "^0.3.6",
+    "mongoose": "^4.6.4",
+    "morgan": "~1.7.0",
+    "normalize.css": "^4.2.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^3.0.0",
+    "redux": "^3.6.0",
+    "redux-immutable": "^3.0.8",
+    "redux-thunk": "^2.1.0",
+    "serve-favicon": "^2.3.2",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
+    "trim-html": "^0.1.7"
   }
 }
