@@ -62,11 +62,14 @@ app.get('/diary', function(req, res) {
     res.sendFile(path.join(views, 'diary.html'));
 });
 
+app.get('/diary/*', function(req, res) {
+    res.sendFile(path.join(views, 'diary.html'));
+});
+
 // 聊天室请求
 app.get('/chat', function(req, res) {
     res.sendFile(path.join(views, 'chat.html'));
 });
-
 
 /**
  * 加载聊天室路由
@@ -84,6 +87,14 @@ require('./routes/group')(groupRouter);
 require('./routes/user')(usersRouter, onlineUsers);
 app.use('/chat', usersRouter);
 app.use('/chat', groupRouter);
+
+app.get('/chat/*', function(req, res) {
+    res.sendFile(path.join(views, 'chat.html'));
+});
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(views, '404.html'));
+});
 
 
 /**
