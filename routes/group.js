@@ -40,9 +40,15 @@ module.exports = function(router) {
     router.post('/group', function(req, res) {
         Group.find({ name: req.body.name }, function(err, docs) {
             if (docs.length === 0) {
-                var newGroup = new Group(req.body);
-                newGroup.save(function(err, doc) {
-                    res.json({ success: true, group: doc });
+                Group.count({}, function(errcount, count) {
+                    if (count < 10) {
+                        var newGroup = new Group(req.body);
+                        newGroup.save(function(err, doc) {
+                            res.json({ success: true, group: doc });
+                        });
+                    } else {
+                        res.json({ success: false, msg: '群组数量已达上限' });
+                    }
                 });
             } else {
                 res.json({ success: false, msg: '该群组已存在' });
